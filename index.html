@@ -1,0 +1,1089 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ferienhaus Zilsdorf</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --black: #222222;
+            --white: #ffffff;
+            --wood: #a67c52;
+            /* Holz */
+            --wood-dark: #8b6541;
+            /* Dunkleres Holz */
+            --olive: #556b2f;
+            /* Oliv */
+            --olive-hover: #455725;
+            --gray-light: #dddddd;
+            --gray-bg: #f7f7f7;
+            --gray-text: #717171;
+            --border-radius-xl: 16px;
+            --border-radius-lg: 12px;
+            --border-radius-md: 8px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            color: var(--black);
+            background-color: var(--white);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Typography */
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--wood);
+            margin-bottom: 0px;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: var(--black);
+        }
+
+        h3 {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--wood-dark);
+        }
+
+        .text-gray {
+            color: var(--gray-text);
+        }
+
+        .font-medium {
+            font-weight: 500;
+        }
+
+        .font-semibold {
+            font-weight: 600;
+        }
+
+        .text-wood {
+            color: var(--wood);
+        }
+
+        /* Navbar overlaying hero */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 24px 48px;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            background: var(--white);
+            padding: 16px 48px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.3rem;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .navbar.scrolled .navbar-brand {
+            color: var(--wood);
+            text-shadow: none;
+        }
+
+        .navbar-links {
+            display: flex;
+            gap: 32px;
+        }
+
+        .navbar-links a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1rem;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+            transition: color 0.2s;
+        }
+
+        .navbar.scrolled .navbar-links a {
+            color: var(--black);
+            text-shadow: none;
+        }
+
+        .navbar-links a:hover,
+        .navbar.scrolled .navbar-links a:hover {
+            color: var(--wood);
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            height: 100vh;
+            width: 100%;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 0 48px;
+        }
+
+        .hero video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100vw;
+            height: 100vh;
+            object-fit: cover;
+            transform: translate(-50%, -50%);
+            z-index: 1;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.45);
+            /* Reduced brightness */
+            z-index: 2;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 3;
+            text-align: center;
+            color: var(--white);
+            padding: 0 24px;
+            max-width: 800px;
+        }
+
+        .hero-content h1 {
+            color: var(--white);
+            font-size: 3.5rem;
+            margin-bottom: 16px;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero-content p {
+            font-size: 1.25rem;
+            font-weight: 400;
+            margin-bottom: 32px;
+            text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero-highlights {
+            display: inline-flex;
+            gap: 24px;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(8px);
+            padding: 16px 32px;
+            border-radius: var(--border-radius-xl);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .hero-highlight-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 500;
+            font-size: 1.1rem;
+        }
+
+        .hero-highlight-item svg {
+            width: 24px;
+            height: 24px;
+            color: var(--wood);
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1120px;
+            margin: 0 auto;
+            padding: 0 24px 64px 24px;
+        }
+
+        /* Content Split */
+        .content-split {
+            display: flex;
+            gap: 80px;
+            margin-bottom: 64px;
+        }
+
+        .left-column {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .right-column {
+            width: 360px;
+            flex-shrink: 0;
+            position: relative;
+        }
+
+        .divider {
+            height: 1px;
+            background: var(--gray-light);
+            margin: 32px 0;
+        }
+
+        /* Decorative Images within text */
+        .decorative-img {
+            width: 100%;
+            height: auto;
+            border-radius: var(--border-radius-lg);
+            margin: 24px 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            object-fit: cover;
+            max-height: 400px;
+        }
+
+        /* Guest Favorite Badge */
+        .guest-favorite-badge {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border: 1px solid var(--gray-light);
+            border-radius: var(--border-radius-lg);
+            padding: 24px;
+            margin-bottom: 32px;
+            background: var(--white);
+        }
+
+        .laurel-icon {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: var(--wood);
+        }
+
+        .badge-text {
+            font-size: 1rem;
+            font-weight: 500;
+            text-align: center;
+            color: var(--black);
+            max-width: 200px;
+        }
+
+        .badge-rating {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+        }
+
+        .badge-rating-top {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--wood-dark);
+        }
+
+        .badge-rating-bottom {
+            font-size: 0.85rem;
+            text-decoration: underline;
+            color: var(--gray-text);
+        }
+
+        /* Host Profile snippet */
+        .host-snippet {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .host-avatar {
+            width: 44px;
+            height: 44px;
+            background: var(--wood);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 1.3rem;
+        }
+
+        .host-details h3 {
+            font-size: 1.1rem;
+            margin-bottom: 2px;
+            color: var(--black);
+        }
+
+        .host-details p {
+            font-size: 0.95rem;
+            color: var(--gray-text);
+        }
+
+        /* Features List */
+        .features-list {
+            list-style: none;
+            margin-bottom: 32px;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 24px;
+            margin-bottom: 32px;
+        }
+
+        .feature-icon {
+            color: var(--wood);
+            width: 28px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .feature-text h4 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: var(--black);
+        }
+
+        .feature-text p {
+            font-size: 0.95rem;
+            color: var(--gray-text);
+            line-height: 1.5;
+        }
+
+        /* Pricing Segment */
+        .pricing-section table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            margin-bottom: 16px;
+        }
+
+        .pricing-section th,
+        .pricing-section td {
+            padding: 14px 0;
+            border-bottom: 1px solid var(--gray-light);
+            font-size: 1rem;
+        }
+
+        .pricing-section th {
+            font-weight: 500;
+            color: var(--wood-dark);
+        }
+
+        .pricing-section tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .notes-list {
+            list-style: none;
+            font-size: 0.95rem;
+            color: var(--black);
+        }
+
+        .notes-list li {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .notes-list li::before {
+            content: "•";
+            color: var(--wood);
+            font-weight: bold;
+            font-size: 1.2rem;
+            line-height: 1;
+        }
+
+        /* Standalone Gallery Section */
+        .gallery-summary {
+            margin-top: 64px;
+            border-top: 1px solid var(--gray-light);
+            padding-top: 64px;
+        }
+
+        .gallery-summary-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+
+        .gallery-summary-header h2 {
+            color: var(--wood-dark);
+            margin-bottom: 0;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+        }
+
+        .gallery-item {
+            width: 100%;
+            aspect-ratio: 4/3;
+            object-fit: cover;
+            border-radius: var(--border-radius-md);
+            cursor: pointer;
+            transition: transform 0.2s, filter 0.2s;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.02);
+            filter: brightness(0.9);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Contact Widget (Sticky) */
+        .sticky-widget {
+            position: sticky;
+            top: 104px;
+            border: 1px solid var(--gray-light);
+            border-radius: var(--border-radius-lg);
+            padding: 24px;
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+            background: var(--white);
+        }
+
+        .widget-price-head {
+            display: flex;
+            align-items: baseline;
+            gap: 4px;
+            margin-bottom: 8px;
+        }
+
+        .widget-price-val {
+            font-size: 1.375rem;
+            font-weight: 600;
+        }
+
+        .form-grid {
+            display: flex;
+            flex-direction: column;
+            border: 1px solid var(--gray-text);
+            border-radius: var(--border-radius-md);
+            overflow: hidden;
+            margin-bottom: 16px;
+        }
+
+        .form-input-group {
+            position: relative;
+            padding: 10px 12px;
+            border-bottom: 1px solid var(--gray-text);
+            background: var(--white);
+            cursor: pointer;
+        }
+
+        .form-input-group:focus-within {
+            box-shadow: inset 0 0 0 2px var(--black);
+            border-radius: var(--border-radius-md);
+            border-color: transparent;
+            z-index: 10;
+        }
+
+        .form-input-group:last-child {
+            border-bottom: none;
+        }
+
+        label {
+            display: block;
+            font-size: 0.65rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--black);
+            margin-bottom: 2px;
+            cursor: pointer;
+        }
+
+        input {
+            width: 100%;
+            border: none;
+            outline: none;
+            font-size: 0.95rem;
+            color: var(--black);
+            background: transparent;
+            cursor: pointer;
+        }
+
+        textarea {
+            width: 100%;
+            border: 1px solid var(--gray-text);
+            border-radius: var(--border-radius-md);
+            padding: 12px;
+            outline: none;
+            font-size: 0.95rem;
+            resize: vertical;
+            min-height: 120px;
+            margin-bottom: 16px;
+            color: var(--black);
+        }
+
+        textarea:focus {
+            box-shadow: inset 0 0 0 2px var(--black);
+        }
+
+        .submit-btn {
+            width: 100%;
+            background: var(--olive);
+            color: var(--white);
+            border: none;
+            padding: 14px 24px;
+            border-radius: var(--border-radius-md);
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+            text-align: center;
+        }
+
+        .submit-btn:hover {
+            background: var(--olive-hover);
+        }
+
+        /* Lightbox Fullscreen */
+        .lightbox {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--white);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            overflow-y: auto;
+        }
+
+        .lightbox.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .lightbox-header {
+            padding: 24px;
+            position: sticky;
+            top: 0;
+            background: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            z-index: 10;
+        }
+
+        .lightbox-close {
+            background: transparent;
+            border: none;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: underline;
+            cursor: pointer;
+            color: var(--wood-dark);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .lightbox-grid {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .lightbox-grid img,
+        .lightbox-grid video {
+            width: 100%;
+            display: block;
+            border-radius: var(--border-radius-lg);
+            border: none;
+        }
+
+        .lightbox-grid iframe {
+            aspect-ratio: 16/9;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--gray-bg);
+            padding: 48px 24px;
+            text-align: center;
+            border-top: 1px solid var(--gray-light);
+            color: var(--gray-text);
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-highlights {
+                flex-direction: column;
+                gap: 12px;
+                padding: 16px;
+            }
+
+            .navbar {
+                padding: 16px 24px;
+            }
+
+            .navbar-links {
+                display: none;
+            }
+
+            .content-split {
+                flex-direction: column;
+                gap: 40px;
+            }
+
+            .right-column {
+                width: 100%;
+            }
+
+            .sticky-widget {
+                position: static;
+                box-shadow: none;
+                border: none;
+                border-radius: 0;
+                padding: 24px 0;
+                border-top: 1px solid var(--gray-light);
+                border-bottom: 1px solid var(--gray-light);
+            }
+
+            .guest-favorite-badge {
+                flex-direction: column;
+                gap: 16px;
+                align-items: flex-start;
+            }
+
+            .badge-rating {
+                align-items: flex-start;
+                flex-direction: row;
+                gap: 8px;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HERO VIDEO SECTION -->
+    <header class="hero" id="home">
+        <!-- Transparent Navbar Absolute on top of Hero -->
+        <nav class="navbar">
+            <a href="#home" class="navbar-brand">
+                Ferienhaus Birrenbach
+            </a>
+            <div class="navbar-links">
+                <a href="#infos">Infos</a>
+                <a href="#preise">Preise</a>
+                <a href="#galerie">Galerie</a>
+                <a href="#buchen">Buchen</a>
+            </div>
+        </nav>
+
+        <video autoplay muted loop playsinline>
+            <source src="0306.480p.mov">
+        </video>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1>Ferienhaus Birrenbach</h1>
+            <p>Diese Villa im Landhausstil mitten in der Eifel liegt romantisch in einem wunderbaren Garten von 4500 m²
+                mit einem uralten Baumbestand.</p>
+            <div class="hero-highlights">
+                <div class="hero-highlight-item">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="9" cy="7" r="4"></circle>
+                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                        <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                    </svg>
+                    Bis 12 Gäste
+                </div>
+                <div class="hero-highlight-item">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                        <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                    </svg>
+                    5 Schlafzimmer
+                </div>
+                <div class="hero-highlight-item">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"></path>
+                        <polyline points="14 2 14 8 20 8"></polyline>
+                        <path d="M16 13H8"></path>
+                        <path d="M16 17H8"></path>
+                        <path d="M10 9H8"></path>
+                    </svg>
+                    Wellness & Sauna
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+
+        <div class="content-split" id="infos">
+            <!-- LEFT COLUMN -->
+            <div class="left-column">
+
+                <div class="guest-favorite-badge">
+                    <div class="laurel-icon">
+                        <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"
+                            style="height:32px;width:32px;fill:currentColor;">
+                            <path
+                                d="M16 1.8A14.2 14.2 0 1 0 30.2 16 14.2 14.2 0 0 0 16 1.8zm0 26.4A12.2 12.2 0 1 1 28.2 16 12.2 12.2 0 0 1 16 28.2z">
+                            </path>
+                            <path
+                                d="m16 9.5-2.2 4.4-4.8.7 3.5 3.4-.8 4.8 4.3-2.3 4.3 2.3-.8-4.8 3.5-3.4-4.8-.7L16 9.5z">
+                            </path>
+                        </svg>
+                        Willkommen im<br>Ferienhaus Birrenbach
+                    </div>
+                    <div class="badge-text">
+                        Eine Villa im Landhausstil mitten in der romantischen Eifel
+                    </div>
+                </div>
+
+                <div class="host-snippet">
+                    <div class="host-avatar">R</div>
+                    <div class="host-details">
+                        <h3 class="font-medium">Ruth Birrenbach</h3>
+                        <p>Tel.: 06593 809062 · Pappelweg 7, 54578 Zilsdorf</p>
+                    </div>
+                </div>
+
+                <div class="divider"></div>
+
+                <!-- Integration of real ferienhausbirrenbach.de text -->
+                <p style="font-size: 1.15rem; color: var(--black); line-height: 1.8; margin-bottom: 40px;">
+                    Diese Villa im Landhausstil mitten in der Eifel liegt romantisch in einem wunderbaren Garten von
+                    4500 m² mit einem uralten Baumbestand. Das Ferienhaus bietet auf über 200 m² reichlich Platz für
+                    große Familien oder kleine Gruppen mit bis zu 12 Personen.
+                </p>
+
+                <ul class="features-list">
+                    <li class="feature-item">
+                        <div class="feature-icon">
+                            <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"
+                                style="height:28px;width:28px;fill:none;stroke:currentColor;stroke-width:2;">
+                                <path
+                                    d="M12 28h8M16 28v-8M7 8v12M25 8v12M3 4h10M19 4h10M8 8H6a2 2 0 00-2 2v6a2 2 0 002 2h2M24 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2">
+                                </path>
+                            </svg>
+                        </div>
+                        <div class="feature-text">
+                            <h4>Viel Platz auf 2 Etagen</h4>
+                            <p>Auf 2 Etagen befinden sich 1 Küche, 2 Wohnzimmer, ein Esszimmer, 2,5 Bäder und bis zu 5
+                                Schlafzimmer.</p>
+                        </div>
+                    </li>
+
+                    <!-- Decorative image inline -->
+                    <img src="Grill wand(4).jpg" class="decorative-img" alt="Garten Deko">
+
+                    <li class="feature-item">
+                        <div class="feature-icon">
+                            <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"
+                                style="height:28px;width:28px;fill:none;stroke:currentColor;stroke-width:2;">
+                                <path d="M26 18c0 5.5-4.5 10-10 10S6 23.5 6 18 10.5 8 16 8s10 4.5 10 10z"></path>
+                                <path d="M16 8V3M8 10L4 6M24 10l4-4"></path>
+                            </svg>
+                        </div>
+                        <div class="feature-text">
+                            <h4>Wunderbarer Garten & Terrasse</h4>
+                            <p>Den Sommer können Sie auf der riesigen Südterrasse genießen, umgeben von 4500 m²
+                                romantischem Garten mit uraltem Baumbestand.</p>
+                        </div>
+                    </li>
+
+                    <!-- Decorative image inline -->
+                    <img src="Wohnzimmer(1).jpg" class="decorative-img" alt="Wohnzimmer Deko">
+
+                    <li class="feature-item">
+                        <div class="feature-icon">
+                            <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"
+                                style="height:28px;width:28px;fill:none;stroke:currentColor;stroke-width:2;">
+                                <path d="M16 30s10-5.5 10-14A10 10 0 006 16c0 8.5 10 14 10 14z"></path>
+                                <path d="M16 12v6"></path>
+                            </svg>
+                        </div>
+                        <div class="feature-text">
+                            <h4>Wellness & Gemütlichkeit</h4>
+                            <p>Es erwartet Sie ein kleiner Wellnessbereich mit Sauna und Bad im Souterrain. Im Winter
+                                wärmen Sie sich an der gemütlichen Wärme des Kachelofens.</p>
+                        </div>
+                    </li>
+
+                    <li class="feature-item">
+                        <div class="feature-icon">
+                            <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"
+                                style="height:28px;width:28px;fill:none;stroke:currentColor;stroke-width:2;">
+                                <circle cx="16" cy="16" r="12"></circle>
+                                <path d="M16 10v6l4 2"></path>
+                            </svg>
+                        </div>
+                        <div class="feature-text">
+                            <h4>Vollausstattung</h4>
+                            <p>Spülmaschine, Waschmaschine und Trockner sind für Ihren Langzeitkomfort
+                                selbstverständlich vorhanden.</p>
+                        </div>
+                    </li>
+                </ul>
+
+                <div class="divider" id="preise"></div>
+
+                <div class="pricing-section">
+                    <h2 style="color: var(--wood-dark)">Preisliste & Bedingungen</h2>
+                    <p class="text-gray" style="margin-bottom: 24px;">Transparente Preise für Ihren Aufenthalt in der
+                        Eifel.</p>
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Personenanzahl</th>
+                                <th>Preis pro Wochenende</th>
+                                <th>Jeder weitere Tag</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Bis zu 8 Personen</td>
+                                <td class="font-medium text-wood">660 €</td>
+                                <td>275 € (Woche: 1.760 €)</td>
+                            </tr>
+                            <tr>
+                                <td>Jede weitere erwachsene Person</td>
+                                <td class="font-medium text-wood">66 €</td>
+                                <td>33 €</td>
+                            </tr>
+                            <tr>
+                                <td>Jedes weitere Kind (3–15 Jahre)</td>
+                                <td class="font-medium text-wood">33 €</td>
+                                <td>17 €</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <ul class="notes-list" style="margin-top: 24px;">
+                        <li>Kinder bis einschließlich 2 Jahren sind kostenlos.</li>
+                        <li>Bettwäsche und Handtücher: 20 € pro Person.</li>
+                        <li>Saunatücher bzw. Bademäntel nach Bedarf: 3 €.</li>
+                        <li>Endreinigung: 100 €.</li>
+                        <li>Check out: Freitags um 11.00 Uhr, an allen anderen Tagen nach Vereinbarung.</li>
+                    </ul>
+                </div>
+
+                <div class="divider"></div>
+
+            </div>
+
+            <!-- RIGHT COLUMN: Simple Booking Widget -->
+            <div class="right-column" id="buchen">
+                <div class="sticky-widget">
+
+                    <div class="widget-price-head">
+                        <div class="widget-price-val" style="color: var(--wood-dark);">Anfrage</div>
+                    </div>
+                    <p style="margin-bottom: 24px; color: var(--black); font-size: 0.95rem;">
+                        Wir freuen uns über Ihre Nachricht.
+                    </p>
+
+                    <form id="contact-form">
+                        <div class="form-grid">
+                            <div class="form-input-group">
+                                <label for="vorname">Vorname *</label>
+                                <input type="text" id="vorname" required>
+                            </div>
+                            <div class="form-input-group">
+                                <label for="nachname">Nachname *</label>
+                                <input type="text" id="nachname" required>
+                            </div>
+                            <div class="form-input-group">
+                                <label for="email">E-Mail *</label>
+                                <input type="email" id="email" required>
+                            </div>
+                            <div class="form-input-group">
+                                <label for="telefon">Telefon</label>
+                                <input type="tel" id="telefon">
+                            </div>
+                        </div>
+
+                        <textarea id="message" placeholder="Meine Nachricht" required></textarea>
+
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <span class="text-gray" style="font-size: 0.85rem;">* Pflichtfelder</span>
+                            <button type="submit" class="submit-btn" id="submit-action"
+                                style="width: auto; padding: 12px 32px; background: #e8e6e1; color: var(--black); border: 1px solid var(--gray-text); font-weight: 500;">
+                                Absenden
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Standalone Gallery -->
+        <div class="gallery-summary" id="galerie">
+            <div class="gallery-summary-header">
+                <h2>Bildergalerie Haus</h2>
+                <button class="action-btn" id="open-lightbox-btn"
+                    style="background:transparent; border:none; color:var(--wood); font-weight:600; text-decoration:underline; cursor:pointer;">
+                    Alle Fotos in groß
+                </button>
+            </div>
+
+            <div class="gallery-grid">
+                <!-- [REPLACE_IMAGE_1] -->
+                <img src="Einfahrt(1).jpg" class="gallery-item lightbox-trigger" alt="Außenansicht Haus">
+                <!-- [REPLACE_IMAGE_2] -->
+                <img src="Grill(1).jpg" class="gallery-item lightbox-trigger" alt="Garten">
+                <!-- [REPLACE_IMAGE_3] -->
+                <img src="Wohnzimmer oben.jpg" class="gallery-item lightbox-trigger" alt="Wohnzimmer">
+                <!-- [REPLACE_IMAGE_4] -->
+                <img src="Küche(2).jpg" class="gallery-item lightbox-trigger" alt="Küche">
+                <!-- [REPLACE_IMAGE_5] -->
+                <img src="Schlafzimmer.jpg" class="gallery-item lightbox-trigger" alt="Schlafzimmer">
+                <!-- [REPLACE_IMAGE_6] -->
+                <img src="Esszimmer(neu)(3).jpg" class="gallery-item lightbox-trigger" alt="Badezimmer">
+            </div>
+        </div>
+
+    </main>
+
+    <footer>
+        Ferienhaus Birrenbach &copy; 2026. Alle Rechte vorbehalten. | Pappelweg 7, 54578 Zilsdorf
+    </footer>
+
+    <!-- Full Gallery Lightbox -->
+    <div class="lightbox" id="lightbox">
+        <div class="lightbox-header">
+            <h2 style="margin: 0; font-size: 1.25rem; color: var(--wood-dark);">Bildergalerie</h2>
+            <button class="lightbox-close" id="close-lightbox-btn">
+                <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"
+                    style="display:block;fill:none;height:16px;width:16px;stroke:currentColor;stroke-width:3;overflow:visible">
+                    <path d="m6 6 20 20M26 6 6 26"></path>
+                </svg>
+                Schließen
+            </button>
+        </div>
+        <div class="lightbox-grid">
+            <video autoplay muted loop playsinline>
+                <source src="0306.480p.mov">
+            </video>
+            <!-- [REPLACE_IMAGE_1] -->
+            <img src="Einfahrt(1).jpg" alt="Außenansicht Haus">
+            <!-- [REPLACE_IMAGE_2] -->
+            <img src="Grill(1).jpg" alt="Garten">
+            <!-- [REPLACE_IMAGE_3] -->
+            <img src="Wohnzimmer oben.jpg" alt="Wohnzimmer">
+            <!-- [REPLACE_IMAGE_4] -->
+            <img src="Küche(2).jpg" alt="Küche">
+            <!-- [REPLACE_IMAGE_5] -->
+            <img src="Schlafzimmer.jpg" alt="Schlafzimmer">
+            <!-- [REPLACE_IMAGE_6] -->
+            <img src="Esszimmer(neu)(3).jpg" alt="Badezimmer">
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Sticky Navbar
+            const navbar = document.querySelector('.navbar');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            });
+
+            // Lightbox
+            const lightbox = document.getElementById('lightbox');
+            const openBtns = [document.getElementById('open-lightbox-btn')];
+            const closeBtn = document.getElementById('close-lightbox-btn');
+            const galleryItems = document.querySelectorAll('.lightbox-trigger');
+
+            const openLightbox = () => { lightbox.classList.add('active'); document.body.style.overflow = 'hidden'; };
+            const closeLightbox = () => { lightbox.classList.remove('active'); document.body.style.overflow = ''; };
+
+            openBtns.forEach(btn => btn?.addEventListener('click', openLightbox));
+            closeBtn.addEventListener('click', closeLightbox);
+
+            galleryItems.forEach(item => item.addEventListener('click', openLightbox));
+
+            // Form Submit -> Mailto (SIMPLIFIED)
+            const contactForm = document.getElementById('contact-form');
+            contactForm.addEventListener('submit', function (e) {
+                e.preventDefault();
+
+                const vorname = document.getElementById('vorname').value;
+                const nachname = document.getElementById('nachname').value;
+                const email = document.getElementById('email').value;
+                const telefon = document.getElementById('telefon').value;
+                const message = document.getElementById('message').value;
+
+                const ownerEmail = '[OWNER_EMAIL]';
+                const subject = 'Anfrage Ferienhaus Birrenbach';
+
+                let bodyText = `Neue Buchungsanfrage:\n\n`;
+                bodyText += `Kontaktdaten:\n`;
+                bodyText += `Vorname: ${vorname}\n`;
+                bodyText += `Nachname: ${nachname}\n`;
+                bodyText += `E-Mail: ${email}\n`;
+                bodyText += `Telefon: ${telefon}\n\n`;
+                bodyText += `Nachricht:\n${message}\n`;
+
+                const mailtoLink = `mailto:${ownerEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(bodyText)}`;
+                window.location.href = mailtoLink;
+            });
+        });
+    </script>
+</body>
+
+</html>
