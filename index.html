@@ -649,23 +649,36 @@
         /* Responsive */
         @media (max-width: 900px) {
             .hero {
-                height: 65vh;
-                min-height: 500px;
-                padding-top: 80px;
+                height: auto;
+                min-height: 75vh;
+                padding-top: 100px;
+                padding-bottom: 64px;
+                padding-left: 20px;
+                padding-right: 20px;
             }
 
             .hero-content h1 {
-                font-size: 2.5rem;
+                font-size: 2.1rem;
+                margin-top: 16px;
+            }
+            
+            .hero-content p {
+                font-size: 1.05rem;
+                margin-bottom: 24px;
             }
 
             .hero-highlights {
                 flex-direction: column;
                 gap: 12px;
-                padding: 16px;
+                padding: 16px 20px;
             }
 
             .navbar {
-                padding: 16px 24px;
+                padding: 16px 20px;
+            }
+            
+            .navbar-brand {
+                font-size: 1.1rem;
             }
 
             .navbar-links {
@@ -825,7 +838,7 @@
                         </div>
                         <div class="feature-text">
                             <h4>Viel Platz auf 2 Etagen</h4>
-                            <p>Auf 2 Etagen befinden sich 1 Küche, 2 Wohnzimmer, ein Esszimmer, 2,5 Bäder und bis zu 5
+                            <p>Auf 2 Etagen befinden sich 1 Küche, 2 Wohnzimmer, ein Esszimmer, 3,5 Bäder und 5
                                 Schlafzimmer.</p>
                         </div>
                     </li>
@@ -936,7 +949,7 @@
                       style="border:0; border-radius: var(--border-radius-lg); filter: grayscale(15%) sepia(8%); box-shadow: 0 4px 12px rgba(0,0,0,0.05);"
                       loading="lazy"
                       allowfullscreen
-                      src="https://www.google.com/maps?q=Pappelweg+7,+54578+Zilsdorf&output=embed">
+                      src="https://www.google.com/maps?q=Ferienhaus+Birrenbach,+Pappelweg+7,+Zilsdorf&output=embed">
                     </iframe>
                 </div>
                 
@@ -994,8 +1007,8 @@
             <div class="gallery-summary-header">
                 <h2>Bildergalerie Haus</h2>
                 <button class="action-btn" id="open-lightbox-btn"
-                    style="background:transparent; border:none; color:var(--wood); font-weight:600; text-decoration:underline; cursor:pointer;">
-                    Alle Fotos in groß
+                    style="background:var(--white); border:1px solid var(--black); color:var(--black); font-weight:600; padding:10px 24px; border-radius:8px; cursor:pointer; text-decoration:none; transition:all 0.2s;">
+                    Alle Fotos in Groß anzeigen
                 </button>
             </div>
 
